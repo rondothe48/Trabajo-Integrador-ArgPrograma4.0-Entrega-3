@@ -1,7 +1,5 @@
 package org.example;
 
-import com.mysql.cj.protocol.x.XProtocolRow;
-
 public class Pronostico {
 
     public String getEquipo1() {
@@ -27,12 +25,21 @@ public class Pronostico {
     private int golesEquipo1;
     private int golesEquipo2;
 
-    public Pronostico(String participante, String equipo1, String equipo2, int golesEquipo1, int golesEquipo2) {
+    public void setPronostico(String pronostico) {
+        this.pronostico = pronostico;
+    }
+
+    public String getPronostico() {
+        return pronostico;
+    }
+
+    private String pronostico;
+
+    public Pronostico(String participante, String equipo1, String equipo2, String pronostico) {
         this.participante = participante;
         this.equipo1 = equipo1;
         this.equipo2 = equipo2;
-        this.golesEquipo1 = golesEquipo1;
-        this.golesEquipo2 = golesEquipo2;
+        this.pronostico=pronostico;
     }
 
 
@@ -44,10 +51,10 @@ public class Pronostico {
         this.participante = participante;
     }
     private resultadoEnum pronosticoPartido;
-    private resultadoEnum pronostico;
+    private resultadoEnum pronostico1;
 
-    public resultadoEnum getPronostico() {
-        return this.pronostico;
+    public resultadoEnum getPronostico1() {
+        return this.pronostico1;
     }
     public void setPronostico(resultadoEnum pronosticoPartido) {
         this.pronosticoPartido = pronosticoPartido;
@@ -55,11 +62,11 @@ public class Pronostico {
 
     public resultadoEnum determinarResultado() {
         if (golesEquipo1 > golesEquipo2) {
-            return resultadoEnum.GANADOR_EQUIPO1;
+            return resultadoEnum.E1;
         } else if (golesEquipo1 < golesEquipo2) {
-            return resultadoEnum.GANADOR_EQUIPO2;
+            return resultadoEnum.E2;
         } else {
-            return resultadoEnum.EMPATE;
+            return resultadoEnum.E0;
         }
     }
 

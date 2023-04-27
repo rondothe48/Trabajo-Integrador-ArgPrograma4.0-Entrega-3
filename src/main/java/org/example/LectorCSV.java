@@ -1,92 +1,96 @@
 package org.example;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class LectorCSV {
-    private static String archivoCsv;
-    private static String delimitador;
+    private final String archivo;
 
-    public LectorCSV(String archivoCsv, String delimitador) {
-        LectorCSV.archivoCsv = archivoCsv;
-        LectorCSV.delimitador = delimitador;
+    public LectorCSV(String archivo) {
+        this.archivo = archivo;
     }
 
-    public static List<Pronostico> getPronostico() throws IOException {
-        List<Pronostico> pronosticos = new ArrayList<>();
+    public List<Partido> leerPartidos() throws IOException {
+        List<Partido> partidos = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(archivoCsv))) {
-            int puntos= 0;
+        try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
             br.readLine();
             String linea;
             while ((linea = br.readLine()) != null) {
-                String[] columnas = linea.split(delimitador);
-                Pronostico pronostico = new Pronostico(columnas[1], columnas[2], columnas[5], Integer.parseInt(columnas[3]), Integer.parseInt(columnas[4]));
-
-                pronostico.setPronostico(pronostico.determinarResultado());
-                resultadoEnum pronosticoPartido = pronostico.determinarResultado();
-
-                if (pronosticoPartido == resultadoEnum.GANADOR_EQUIPO1) {
-                    System.out.println(columnas[1] + " predijo que el partido " + columnas[2] + " vs " + columnas[5] + " tendría como resultado: " + "Ganador " + columnas[2]);
-                } else if (pronosticoPartido == resultadoEnum.GANADOR_EQUIPO2) {
-                    System.out.println(columnas[1] + " predijo que el partido " + columnas[2] + " vs " + columnas[5] + " tendría como resultado: " + "Ganador " + columnas[5]);
-                } else if (pronosticoPartido == resultadoEnum.EMPATE) {
-                    System.out.println(columnas[1] + " predijo que el partido " + columnas[2] + " vs " + columnas[5] + " tendría como resultado: Empate");
+                String[] datos = linea.split(",");
+                if (datos.length != 5) {
+                    throw new IllegalArgumentException("El archivo CSV de partidos debe tener 3 columnas.");
                 }
+                String equipo1 = datos[1].trim();
+                String equipo2 = datos[4].trim();
+                int golesequipo1 = Integer.parseInt(datos[2].trim());
+                int golesequipo2 = Integer.parseInt(datos[3].trim());
+                String resultado = datos[0].trim();
+                partidos.add(new Partido(equipo1, equipo2, golesequipo1, golesequipo2, resultado));
 
-                pronosticos.add(pronostico);
+                if (resultado.equals(String.valueOf(resultadoEnum.E1))) {
+                    System.out.println("El partido " + datos[1] + " vs " + datos[4] + " tuvo como resultado: " + "Ganador " + datos[4]);
+                } else if (resultado.equals(String.valueOf(resultadoEnum.E2))) {
+                    System.out.println("El partido " + datos[1] + " vs " + datos[4] + " tuvo como resultado: " + "Ganador " + datos[1]);
+                } else if (resultado.equals(String.valueOf(resultadoEnum.E0))) {
+                    System.out.println("El partido " + datos[1] + " vs " + datos[4] + " tuvo como resultado: " + "Empate");
+                }
+            }
+        }
+
+        return partidos;
+    }
+
+    public List<Pronostico> leerPronosticos() throws IOException {
+        List<Pronostico> pronosticos = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
+            br.readLine();
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] datos = linea.split(",");
+                if (datos.length != 4) {
+                    throw new IllegalArgumentException("El archivo CSV de pronósticos debe tener 3 columnas.");
+                }
+                String participante = datos[1].trim();
+                String equipo1 = datos[2].trim();
+                String equipo2 = datos[3].trim();
+                String pronostico = datos[0].trim();
+
+                pronosticos.add(new Pronostico(participante, equipo1, equipo2, pronostico));
+
+                if (pronostico.equals(String.valueOf(resultadoEnum.E1))) {
+                    System.out.println(datos[1] + ":" + "El partido " + datos[2] + " vs " + datos[3] + " tendría como resultado: " + "Ganador " + datos[2]);
+                } else if (pronostico.equals(String.valueOf(resultadoEnum.E2))) {
+                    System.out.println(datos[1] + ":" + "El partido " + datos[2] + " vs " + datos[3] + " tendría como resultado: " + "Ganador " + datos[3]);
+                } else if (pronostico.equals(String.valueOf(resultadoEnum.E0))) {
+                    System.out.println(datos[1] + ":" + "El partido " + datos[2] + " vs " + datos[3] + " tendría como resultado: " + "Empate");
+                }
             }
         }
 
         return pronosticos;
     }
 
-    public List<Partido> getResultado() throws IOException {
-        List<Partido> resultados = new ArrayList<>();
-
-        try (BufferedReader br = new BufferedReader(new FileReader(archivoCsv))) {
-            br.readLine();
-            String linea;
-            while ((linea = br.readLine()) != null) {
-                String[] columnas = linea.split(delimitador);
-                Partido resultado = new Partido(columnas[3], columnas[8], Integer.parseInt(columnas[5]), Integer.parseInt(columnas[6]));
-
-                resultado.setResultado(resultado.determinarResultado());
-                resultadoEnum resultadoPartido = resultado.determinarResultado();
-
-                if (resultadoPartido == resultadoEnum.GANADOR_EQUIPO1) {
-                    System.out.println("El partido " + columnas[3] + " vs " + columnas[8] + " tuvo como resultado: " + "Ganador " + columnas[3]);
-                } else if (resultadoPartido == resultadoEnum.GANADOR_EQUIPO2) {
-                    System.out.println("El partido " + columnas[3] + " vs " + columnas[8] + " tuvo como resultado: " + "Ganador " + columnas[8]);
-                } else if (resultadoPartido == resultadoEnum.EMPATE) {
-                    System.out.println("El partido " + columnas[3] + " vs " + columnas[8] + " tuvo como resultado: Empate");
-                }
-                resultados.add(resultado);
-
+    public void compararDatos(List<Partido> partidos, List<Pronostico> pronosticos) {
+        int aciertos = 0;
+        int total = Math.min(partidos.size(), pronosticos.size());
+        for (int i = 0; i < total; i++) {
+            Partido partido = partidos.get(i);
+            Pronostico pronostico = pronosticos.get(i);
+            if (partido.getEquipo1().equals(pronostico.getEquipo1()) &&
+                    partido.getEquipo2().equals(pronostico.getEquipo2()) &&
+                    partido.getResultado().equals(pronostico.getPronostico())) {
+                aciertos++;
             }
         }
-
-        return resultados;
-
+        System.out.println("Aciertos: " + aciertos + " de " + total);
     }
 
-    public void compararDatos(List<Partido> resultados, List<Pronostico> pronosticos) {
-        for (Pronostico pronostico : pronosticos) {
-            int puntos = 0;
-            for (Partido resultado : resultados) {
-                if (resultado.getResultado() == pronostico.getPronostico()){
-                    puntos++;
-                }
-            }
-            System.out.println("El pronóstico de " + pronostico.getParticipante() + " para el partido " +
-                    pronostico.getEquipo1() + " vs " + pronostico.getEquipo2() + " tiene " + puntos + " puntos.");
-        }
-    }
+
 }
+
 
 

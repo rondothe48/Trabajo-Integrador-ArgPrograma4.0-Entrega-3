@@ -40,29 +40,40 @@ public class Partido {
     private int golesEquipo1;
     private int golesEquipo2;
 
-    public Partido(String equipo1, String equipo2, int golesEquipo1, int golesEquipo2) {
+    public void setResultado(String resultado) {
+        this.resultado = resultado;
+    }
+
+    public String getResultado() {
+        return resultado;
+    }
+
+    private String resultado;
+
+    public Partido(String equipo1, String equipo2, int golesEquipo1, int golesEquipo2, String resultado) {
         this.equipo1 = equipo1;
         this.equipo2 = equipo2;
         this.golesEquipo1 = golesEquipo1;
         this.golesEquipo2 = golesEquipo2;
+        this.resultado= resultado;
 
     }
     private resultadoEnum resultadoPartido;
-    private resultadoEnum resultado;
+    private resultadoEnum resultado1;
 
-    public resultadoEnum getResultado() {
-        return this.resultado;
+    public resultadoEnum getResultado1() {
+        return this.resultado1;
     }
     public void setResultado(resultadoEnum resultadoPartido) {
         this.resultadoPartido = resultadoPartido;
     }
     public resultadoEnum determinarResultado() {
         if (golesEquipo1 > golesEquipo2) {
-            return resultadoEnum.GANADOR_EQUIPO1;
+            return resultadoEnum.E1;
         } else if (golesEquipo1 < golesEquipo2) {
-            return resultadoEnum.GANADOR_EQUIPO2;
+            return resultadoEnum.E2;
         } else {
-            return resultadoEnum.EMPATE;
+            return resultadoEnum.E0;
         }
     }
 

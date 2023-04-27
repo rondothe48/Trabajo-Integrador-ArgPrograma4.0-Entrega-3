@@ -1,5 +1,5 @@
-﻿Participante - id,	Participante - nombre,	Equipo 1 - Nombre,goles 1,	goles 2,	Equipo 2 - Nombre
-2,Pedro,Argentina,0,0,Arabia Saudita
-2,Pedro,Polonia,1,2,México
-2,Pedro,Argentina,0,0,México
-2,Pedro,Arabia Saudita,2,1,Polonia
+﻿ENUM,	Participante - nombre,	Equipo 1 - Nombre,	Equipo 2 - Nombre
+E0,Pedro,Argentina,Arabia Saudita
+E2,Pedro,Polonia,México
+E2,Pedro,Argentina,México
+E0,Pedro,Arabia Saudita,Polonia
