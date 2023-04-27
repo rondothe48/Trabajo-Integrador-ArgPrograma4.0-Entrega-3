@@ -13,12 +13,12 @@ public class Main {
         try{
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/argpro", "root", "332211");
             Statement statement = con.createStatement();
-            statement.execute("SELECT *");
+            statement.execute("SELECT * FROM pronostico");
         } catch(Exception e) {
             System.out.println(e);
         }
-        String pronosticosFile = "src/main/java/org/example/pronostico.csv"; // Ruta del archivo CSV de pronósticos
-        String resultadosFile = "src/main/java/org/example/resultados.csv"; // Ruta del archivo CSV de resultados
+        String pronosticosFile = "src/main/java/org/example/pronostico1.csv"; // Ruta del archivo CSV de pronósticos
+        String resultadosFile = "src/main/java/org/example/resultados1.csv"; // Ruta del archivo CSV de resultados
 
         // Crear una instancia de la clase LectorCSV
         LectorCSV lectorCSV = new LectorCSV(pronosticosFile, resultadosFile);

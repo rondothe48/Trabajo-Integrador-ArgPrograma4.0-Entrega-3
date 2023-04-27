@@ -26,12 +26,23 @@ public class LectorCSV {
                 }
                 String[] pronosticoFields = pronosticoLine.split(",");
 
-                String equipo1 = pronosticoFields[0];
-                String equipo2 = pronosticoFields[1];
-                String resultadoPronostico = pronosticoFields[2];
+                String participante = pronosticoFields[1];
                 // Resto del código para procesar los pronósticos
                 // ...
-                System.out.println("Equipo 1: " + equipo1 + ", Equipo 2: " + equipo2 + ", Pronóstico: " + resultadoPronostico);
+
+                System.out.println("Participante = " + participante);
+
+                if(pronosticoFields[3].equals("X")) {
+                    System.out.println("Gana Equipo 1" + "\n---------------");
+
+                } else if(pronosticoFields[4].equals("X")) {
+                    System.out.println("Empate" + "\n---------------");
+
+                } else {
+                    System.out.println("Gana Equipo 2" + "\n---------------");
+
+                }
+
             }
         } catch (IOException e) {
             System.out.println("Error al leer el archivo de pronósticos: " + e.getMessage());
@@ -50,10 +61,10 @@ public class LectorCSV {
                 }
                 String[] resultadoFields = resultadoLine.split(",");
 
-                String equipo1 = resultadoFields[0];
-                String equipo2 = resultadoFields[1];
-                int golesEquipo1 = Integer.parseInt(resultadoFields[2]);
-                int golesEquipo2 = Integer.parseInt(resultadoFields[3]);
+                String equipo1 = resultadoFields[3];
+                String equipo2 = resultadoFields[8];
+                int golesEquipo1 = Integer.parseInt(resultadoFields[5]);
+                int golesEquipo2 = Integer.parseInt(resultadoFields[6]);
                 // Resto del código para procesar los resultados
                 // ...
                 System.out.println("Equipo 1: " + equipo1 + ", Equipo 2: " + equipo2 + ", Goles Equipo 1: " + golesEquipo1 + ", Goles Equipo 2: " + golesEquipo2);
@@ -63,13 +74,6 @@ public class LectorCSV {
         }
     }
 
-    public void compararResultados() {
-        if (Pronostico.getEquipo1().getNombre().equals(Partido.getEquipo1().getNombre()) &&
-                Pronostico.getEquipo2().getNombre().equals(Partido.getEquipo2().getNombre()) &&
-                Pronostico.getPronosticoResultado() == Partido.getResultado()) {
-            Pronostico.setPuntos(Pronostico.getPuntos() + 1);
-        }
-        System.out.println("Pronóstico para el partido " + pronostico.getEquipo1().getNombre() + " vs " + pronostico.getEquipo2().getNombre() + ": " + pronostico.getPronosticoResultado().toString() + ", Puntos: " + pronostico.getPuntos());
-    }
+
 
 }
