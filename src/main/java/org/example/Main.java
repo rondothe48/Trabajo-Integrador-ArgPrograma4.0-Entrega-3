@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         try{
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/argpro", "root", "332211");
@@ -18,29 +18,23 @@ public class Main {
         } catch(Exception e) {
             System.out.println(e);
         }
-        String pronosticosFile = "src/main/java/org/example/pronostico1.csv"; // Ruta del archivo CSV de pronósticos
-        String resultadosFile = "src/main/java/org/example/resultados1.csv"; // Ruta del archivo CSV de resultados
+        System.out.println("--------------------------");
 
-        // Crear una instancia de la clase LectorCSV
-        LectorCSV lectorCSV = new LectorCSV(pronosticosFile, resultadosFile);
+        LectorCSV lector = new LectorCSV("src/main/java/org/example/resultados1.csv", ",");
+        List<Partido> resultados = lector.leerResultados();
+        for (Partido r : resultados) {
+            System.out.println(r.getEquipo1() + " vs " + r.getEquipo2() + " - Goles del equipo 1: " + r.getGolesEquipo1() + " - Goles del equipo 2: " + r.getGolesEquipo2() );
+        }
 
-        // Leer los pronósticos
-        lectorCSV.leerPronosticos();
+        System.out.println("--------------------------");
 
-        // Leer los resultados
-        lectorCSV.leerResultados();
+        LectorCSV lector2 = new LectorCSV("src/main/java/org/example/pronostico1.csv", ",");
+        List<Pronostico> pronostico = lector2.leerPronosticos();
+        for (Pronostico p : pronostico) {
+            System.out.println(p.getParticipante() + " predijo que "  + p.getEquipo1() + " vs " + p.getEquipo2() + " tendría como resultado: " );
+        }
 
-
-
-        List<Partido> listaDePartidos = new ArrayList<>();
-        List<Equipo> listaDeEquipos = new ArrayList<>();
-        Equipo argentina = new Equipo("Argentina");
-        Equipo brazil = new Equipo("Brazil");
-        Equipo panama = new Equipo("panama");
-        Equipo trinidadytobago = new Equipo("Trinidad y Tobago");
-
-        Partido partido = new Partido(argentina, brazil, 1, 2);
-        listaDePartidos.add(partido);
+        
 
     }
 }

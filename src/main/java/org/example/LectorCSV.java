@@ -1,115 +1,59 @@
 package org.example;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 public class LectorCSV {
-    private String pronosticosFile;
-    private String resultadosFile;
+    private static String archivoCsv;
+    private static String delimitador;
 
-    public LectorCSV(String pronosticosFile, String resultadosFile) {
-        this.pronosticosFile = pronosticosFile;
-        this.resultadosFile = resultadosFile;
+    public LectorCSV(String archivoCsv, String delimitador) {
+        LectorCSV.archivoCsv = archivoCsv;
+        LectorCSV.delimitador = delimitador;
     }
 
-    public void leerPronosticos() {
-        System.out.println("Pronósticos:");
-        try {
-            List<String> pronosticosLines = Files.readAllLines(Paths.get(pronosticosFile));
-            int pronosticosLineCount = 0;
-            for (String pronosticoLine : pronosticosLines) {
-                if (pronosticosLineCount == 0) {
-                    pronosticosLineCount++;
-                    continue;
-                }
-                String[] pronosticoFields = pronosticoLine.split(",");
+    public static List<Pronostico> leerPronosticos() throws IOException {
+        List<Pronostico> pronosticos = new ArrayList<>();
 
-                String participante = pronosticoFields[1];
-                // Resto del código para procesar los pronósticos
-                // ...
+        try (BufferedReader br = new BufferedReader(new FileReader(archivoCsv))) {
+            br.readLine();
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] columnas = linea.split(delimitador);
+                Pronostico pronostico = new Pronostico(columnas[1], columnas[2], columnas[6], columnas[4]);
+                pronosticos.add(pronostico);
+            }
+        }
 
-                System.out.println("Participante = " + participante);
+        return pronosticos;
+    }
 
-                if(pronosticoFields[3].equals("X")) {
-                    System.out.println("Gana Equipo 1" + "\n---------------");
+    public List<Partido> leerResultados() throws IOException {
+        List<Partido> resultados = new ArrayList<>();
 
-                } else if(pronosticoFields[4].equals("X")) {
-                    System.out.println("Empate" + "\n---------------");
+        try (BufferedReader br = new BufferedReader(new FileReader(archivoCsv))) {
+            br.readLine();
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] columnas = linea.split(delimitador);
+                Partido resultado = new Partido(columnas[3], columnas[8], Integer.parseInt(columnas[5]), Integer.parseInt(columnas[6]));
+                resultado.setResultado(resultado.determinarResultado());
+                resultadoEnum resultadoPartido = resultado.determinarResultado();
 
+                if (resultadoPartido == resultadoEnum.GANADOR_EQUIPO1) {
+                    System.out.println("El equipo ganador es: " + columnas[3]);
+                } else if (resultadoPartido == resultadoEnum.GANADOR_EQUIPO2) {
+                    System.out.println("El equipo ganador es: " + columnas[8]);
                 } else {
-                    System.out.println("Gana Equipo 2" + "\n---------------");
-
+                    System.out.println("El partido terminó en empate.");
                 }
-
+                resultados.add(resultado);
             }
-        } catch (IOException e) {
-            System.out.println("Error al leer el archivo de pronósticos: " + e.getMessage());
-        }
-    }
-
-    public void leerResultados() {
-        System.out.println("\nResultados:");
-        try {
-            List<String> resultadosLines = Files.readAllLines(Paths.get(resultadosFile));
-            int resultadosLineCount = 0;
-            for (String resultadoLine : resultadosLines) {
-                if (resultadosLineCount == 0) {
-                    resultadosLineCount++;
-                    continue;
-                }
-                String[] resultadoFields = resultadoLine.split(",");
-
-                String equipo1 = resultadoFields[3];
-                String equipo2 = resultadoFields[8];
-                int golesEquipo1 = Integer.parseInt(resultadoFields[5]);
-                int golesEquipo2 = Integer.parseInt(resultadoFields[6]);
-                // Resto del código para procesar los resultados
-                // ...
-                System.out.println("Equipo 1: " + equipo1 + ", Equipo 2: " + equipo2 + ", Goles Equipo 1: " + golesEquipo1 + ", Goles Equipo 2: " + golesEquipo2);
-
-
-
-            }
-        } catch (IOException e) {
-            System.out.println("Error al leer el archivo de resultados: " + e.getMessage());
-        }
-    }
-
-    public void resultados() {
-        Path resultados = Paths.get("src/main/java/org/example/resultados1.csv");
-        Path pronostico = Paths.get("src/main/java/org/example/pronostico1.csv");
-
-
-        String pronosticoString;
-        String resultadosString;
-        try {
-            resultadosString = Files.readString(resultados);
-            pronosticoString = Files.readString(pronostico);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-            System.exit(0);
-            throw new RuntimeException(e);
         }
 
-        String[] resultadoFields = resultadosString.split("\n");
-        String[] pronosticoFields = resultadosString.split("\n");
-
-
-
-        /*String equipo1 = resultadoFields[3];
-        String equipo2 = resultadoFields[8];
-        int golesEquipo1 = Integer.parseInt(resultadoFields[5]);
-        int golesEquipo2 = Integer.parseInt(resultadoFields[6]);
-
-        if(golesEquipo1 > golesEquipo2 && pronosticoFields[3].equals("X")) {
-
-        } else if(golesEquipo1 == golesEquipo2 && pronosticoFields[4].equals("X")){
-
-        } else {
-
-        }*/
+        return resultados;
     }
 }

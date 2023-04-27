@@ -1,13 +1,8 @@
 package org.example;
 
-public class Equipo {
-    private String nombre;
-
-    public Equipo(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
+public enum Equipo {
+    ARGENTINA,
+    ARABIA_SAUDITA,
+    MEXICO,
+    POLONIA
 }
