@@ -19,18 +19,27 @@ public class LectorCSV {
         List<Pronostico> pronosticos = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(archivoCsv))) {
+            int puntos= 0;
             br.readLine();
             String linea;
             while ((linea = br.readLine()) != null) {
                 String[] columnas = linea.split(delimitador);
                 Pronostico pronostico = new Pronostico(columnas[1], columnas[2], columnas[6], columnas[4]);
+
+                if (columnas[3].equalsIgnoreCase("X")) {
+                    System.out.println(columnas[1] + " predijo que "  + columnas[2] + " vs " + columnas[6] + " tendría como resultado: "  + "Ganador " + columnas[2]);
+                } else if (columnas[5].equalsIgnoreCase("X")) {
+                    System.out.println(columnas[1] + " predijo que "  + columnas[2] + " vs " + columnas[6] + " tendría como resultado: "  + "Ganador " + columnas[6]);
+                } else {
+                    System.out.println(columnas[1] + " predijo que "  + columnas[2] + " vs " + columnas[6] + " tendría como resultado: Empate");
+                }
+
                 pronosticos.add(pronostico);
             }
         }
 
         return pronosticos;
     }
-
     public List<Partido> leerResultados() throws IOException {
         List<Partido> resultados = new ArrayList<>();
 
@@ -44,11 +53,11 @@ public class LectorCSV {
                 resultadoEnum resultadoPartido = resultado.determinarResultado();
 
                 if (resultadoPartido == resultadoEnum.GANADOR_EQUIPO1) {
-                    System.out.println("El equipo ganador es: " + columnas[3]);
+                    System.out.println("El partido " + columnas[3] + " vs " + columnas[8] + " tuvo como resultado: " + "Ganador " + columnas[3]);
                 } else if (resultadoPartido == resultadoEnum.GANADOR_EQUIPO2) {
-                    System.out.println("El equipo ganador es: " + columnas[8]);
+                    System.out.println("El partido " + columnas[3] + " vs " + columnas[8] + " tuvo como resultado: " + "Ganador " + columnas[8]);
                 } else {
-                    System.out.println("El partido terminó en empate.");
+                    System.out.println("El partido " + columnas[3] + " vs " + columnas[8] + " tuvo como resultado: Empate");
                 }
                 resultados.add(resultado);
             }
