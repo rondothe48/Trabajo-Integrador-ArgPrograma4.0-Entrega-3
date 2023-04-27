@@ -5,6 +5,7 @@ import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -28,6 +29,18 @@ public class Main {
 
         // Leer los resultados
         lectorCSV.leerResultados();
+
+
+
+        List<Partido> listaDePartidos = new ArrayList<>();
+        List<Equipo> listaDeEquipos = new ArrayList<>();
+        Equipo argentina = new Equipo("Argentina");
+        Equipo brazil = new Equipo("Brazil");
+        Equipo panama = new Equipo("panama");
+        Equipo trinidadytobago = new Equipo("Trinidad y Tobago");
+
+        Partido partido = new Partido(argentina, brazil, 1, 2);
+        listaDePartidos.add(partido);
 
     }
 }

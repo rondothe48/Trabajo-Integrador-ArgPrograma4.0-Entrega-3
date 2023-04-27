@@ -2,6 +2,7 @@ package org.example;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
@@ -68,12 +69,47 @@ public class LectorCSV {
                 // Resto del código para procesar los resultados
                 // ...
                 System.out.println("Equipo 1: " + equipo1 + ", Equipo 2: " + equipo2 + ", Goles Equipo 1: " + golesEquipo1 + ", Goles Equipo 2: " + golesEquipo2);
+
+
+
             }
         } catch (IOException e) {
             System.out.println("Error al leer el archivo de resultados: " + e.getMessage());
         }
     }
 
+    public void resultados() {
+        Path resultados = Paths.get("src/main/java/org/example/resultados1.csv");
+        Path pronostico = Paths.get("src/main/java/org/example/pronostico1.csv");
 
 
+        String pronosticoString;
+        String resultadosString;
+        try {
+            resultadosString = Files.readString(resultados);
+            pronosticoString = Files.readString(pronostico);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            System.exit(0);
+            throw new RuntimeException(e);
+        }
+
+        String[] resultadoFields = resultadosString.split("\n");
+        String[] pronosticoFields = resultadosString.split("\n");
+
+
+
+        /*String equipo1 = resultadoFields[3];
+        String equipo2 = resultadoFields[8];
+        int golesEquipo1 = Integer.parseInt(resultadoFields[5]);
+        int golesEquipo2 = Integer.parseInt(resultadoFields[6]);
+
+        if(golesEquipo1 > golesEquipo2 && pronosticoFields[3].equals("X")) {
+
+        } else if(golesEquipo1 == golesEquipo2 && pronosticoFields[4].equals("X")){
+
+        } else {
+
+        }*/
+    }
 }
