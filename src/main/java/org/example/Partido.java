@@ -2,8 +2,6 @@ package org.example;
 
 public class Partido {
 
-    private resultadoEnum resultadoPartido;
-
     public String getEquipo1() {
         return equipo1;
     }
@@ -48,6 +46,12 @@ public class Partido {
         this.golesEquipo1 = golesEquipo1;
         this.golesEquipo2 = golesEquipo2;
 
+    }
+    private resultadoEnum resultadoPartido;
+    private resultadoEnum resultado;
+
+    public resultadoEnum getResultado() {
+        return this.resultado;
     }
     public void setResultado(resultadoEnum resultadoPartido) {
         this.resultadoPartido = resultadoPartido;

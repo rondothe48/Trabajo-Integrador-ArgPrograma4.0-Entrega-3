@@ -1,5 +1,5 @@
-Participante - id,	Participante - nombre,	Equipo 1 - Nombre,	Gana 1,	Empata,	Gana 2,	Equipo 2 - Nombre
-1,Mariana,Argentina,X,,,Arabia Saudita
-1,Mariana,Polonia,,X,,México
-1,Mariana,Argentina,X,,,México
-1,Mariana,Arabia Saudita,,,X,Polonia
+Participante - id,	Participante - nombre,	Equipo 1 - Nombre,	goles 1,	goles 2,	Equipo 2 - Nombre
+1,Mariana,Argentina,0,0,Arabia Saudita
+1,Mariana,Polonia,2,1,México
+1,Mariana,Argentina,2,1,México
+1,Mariana,Arabia Saudita,1,2,Polonia
