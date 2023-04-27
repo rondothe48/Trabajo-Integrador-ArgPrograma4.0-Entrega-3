@@ -21,7 +21,7 @@ public class LectorCSV {
             while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split(",");
                 if (datos.length != 5) {
-                    throw new IllegalArgumentException("El archivo CSV de partidos debe tener 3 columnas.");
+                    throw new IllegalArgumentException("El archivo CSV de partidos debe tener 5 columnas.");
                 }
                 String equipo1 = datos[1].trim();
                 String equipo2 = datos[4].trim();
@@ -52,7 +52,7 @@ public class LectorCSV {
             while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split(",");
                 if (datos.length != 4) {
-                    throw new IllegalArgumentException("El archivo CSV de pronósticos debe tener 3 columnas.");
+                    throw new IllegalArgumentException("El archivo CSV de pronósticos debe tener 4 columnas.");
                 }
                 String participante = datos[1].trim();
                 String equipo1 = datos[2].trim();
