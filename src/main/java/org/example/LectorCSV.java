@@ -63,4 +63,13 @@ public class LectorCSV {
         }
     }
 
+    public void compararResultados() {
+        if (Pronostico.getEquipo1().getNombre().equals(Partido.getEquipo1().getNombre()) &&
+                Pronostico.getEquipo2().getNombre().equals(Partido.getEquipo2().getNombre()) &&
+                Pronostico.getPronosticoResultado() == Partido.getResultado()) {
+            Pronostico.setPuntos(Pronostico.getPuntos() + 1);
+        }
+        System.out.println("Pronóstico para el partido " + pronostico.getEquipo1().getNombre() + " vs " + pronostico.getEquipo2().getNombre() + ": " + pronostico.getPronosticoResultado().toString() + ", Puntos: " + pronostico.getPuntos());
+    }
+
 }
