@@ -75,24 +75,18 @@ public class LectorCSV {
 
     }
 
-    public void compararDatos (List<Partido> resultados, List<Pronostico> pronosticos) {
+    public void compararDatos(List<Partido> resultados, List<Pronostico> pronosticos) {
         for (Pronostico pronostico : pronosticos) {
             int puntos = 0;
             for (Partido resultado : resultados) {
                 if (resultado.getResultado() == pronostico.getPronostico()){
                     puntos++;
-                }else {
-                    puntos=+0;
                 }
-
-                System.out.println("El pronóstico de " + pronostico.getParticipante() + " para el partido " +
-                        pronostico.getEquipo1() + " vs " + pronostico.getEquipo2() + " tiene " + puntos + " puntos.");
             }
+            System.out.println("El pronóstico de " + pronostico.getParticipante() + " para el partido " +
+                    pronostico.getEquipo1() + " vs " + pronostico.getEquipo2() + " tiene " + puntos + " puntos.");
         }
-
-
     }
-
 }
 
 
