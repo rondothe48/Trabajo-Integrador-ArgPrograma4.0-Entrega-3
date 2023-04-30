@@ -4,6 +4,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +15,20 @@ public class Main {
 
         try{
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/argpro", "root", "332211");
-            Statement statement = con.createStatement();
-            statement.execute("SELECT * FROM pronostico");
+            Statement stmt = con.createStatement();
+
+            ResultSet rs=stmt.executeQuery("SELECT * FROM pronostico");
+            while(rs.next()) System.out.println(rs.getInt(1));
+
+            
+            stmt.close();
         } catch(Exception e) {
             System.out.println(e);
         }
+
+
+
+
         System.out.println("\n---------------- RESULTADOS ----------------");
 
         LectorCSV lector = new LectorCSV("src/main/java/org/example/resultados1.csv");
