@@ -1,9 +1,9 @@
-ENUM,	Participante - nombre,	Equipo 1 - Nombre,	Equipo 2 - Nombre
-E2,Mariana,Argentina,Arabia Saudita
-E0,Mariana,Polonia,Mexico
-E1,Mariana,Argentina,Mexico
-E2,Mariana,Arabia Saudita,Polonia
-E0,Pedro,Argentina,Arabia Saudita
-E2,Pedro,Polonia,Mexico
-E2,Pedro,Argentina,Mexico
-E0,Pedro,Arabia Saudita,Polonia
+ENUM,	Participante - nombre,	Equipo 1 - Nombre,	Equipo 2 - Nombre, idNombre
+E2,Mariana,Argentina,Arabia Saudita,1
+E0,Mariana,Polonia,Mexico,1
+E1,Mariana,Argentina,Mexico,1
+E2,Mariana,Arabia Saudita,Polonia,1
+E0,Pedro,Argentina,Arabia Saudita,2
+E2,Pedro,Polonia,Mexico,2
+E2,Pedro,Argentina,Mexico,2
+E0,Pedro,Arabia Saudita,Polonia,2

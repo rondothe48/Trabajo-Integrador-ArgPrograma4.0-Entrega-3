@@ -10,6 +10,16 @@ import java.util.Map;
 public class Main {
     public static void main(String[] args) throws IOException {
         try {
+            String[] resultadoDFila;
+            String[] pronosticoDFila;
+            BaseDeDatos dataBase = new BaseDeDatos();
+
+            resultadoDFila = dataBase.getResultadoDFila();
+            pronosticoDFila = dataBase.getPronosticoDFila();
+
+            Lector LectorDB = new Lector(resultadoDFila, pronosticoDFila);
+
+
             //dataBase();
         } catch(Exception e) {System.out.println(e.getMessage());}
 
