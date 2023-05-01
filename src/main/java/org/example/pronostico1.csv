@@ -1,5 +1,9 @@
 ENUM,	Participante - nombre,	Equipo 1 - Nombre,	Equipo 2 - Nombre
 E2,Mariana,Argentina,Arabia Saudita
-E0,Mariana,Polonia,México
-E1,Mariana,Argentina,México
+E0,Mariana,Polonia,Mexico
+E1,Mariana,Argentina,Mexico
 E2,Mariana,Arabia Saudita,Polonia
+E0,Pedro,Argentina,Arabia Saudita
+E2,Pedro,Polonia,Mexico
+E2,Pedro,Argentina,Mexico
+E0,Pedro,Arabia Saudita,Polonia
