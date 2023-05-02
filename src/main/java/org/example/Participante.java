@@ -5,4 +5,8 @@ public class Participante {
        nombre = name;
     }
     private String nombre;
+
+    public String getNombre() {
+        return nombre;
+    }
 }

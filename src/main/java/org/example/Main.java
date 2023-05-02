@@ -19,27 +19,28 @@ public class Main {
 
             Lector LectorDB = new Lector(resultadoDFila, pronosticoDFila);
 
+            LectorDB.Funcion();
 
             //dataBase();
         } catch(Exception e) {System.out.println(e.getMessage());}
 
 
-        System.out.println("\n---------------- RESULTADOS ----------------");
+       /* System.out.println("\n---------------- RESULTADOS ----------------");
 
         LectorCSV lector = new LectorCSV("src/main/java/org/example/resultados1.csv");
         List<Partido> resultados = lector.leerPartidos();
         /*for (Partido r : resultados) {
             System.out.println(r.getEquipo1() + " vs " + r.getEquipo2() + " - Goles del equipo 1: " + r.getGolesEquipo1() + " - Goles del equipo 2: " + r.getGolesEquipo2() );
-        }*/
+        }
 
         System.out.println("\n---------------- PRONOSTICO MARIANA ----------------");
 
         LectorCSV lector2 = new LectorCSV("src/main/java/org/example/pronostico1.csv");
         List<Pronostico> pronostico2 = lector2.leerPronosticos();
         lector2.compararDatos(resultados, pronostico2);
-        /*for (Pronostico p : pronostico) {
+        for (Pronostico p : pronostico) {
             System.out.println("Los puntajes son:");
-        }*/
+        }
         System.out.println("\n---------------- PRONOSTICO PEDRO ----------------");
 
         LectorCSV lector3 = new LectorCSV("src/main/java/org/example/pronostico.csv");
@@ -59,6 +60,6 @@ public class Main {
             stmt.close();
         } catch(Exception e) {
             System.out.println(e.getMessage());
-        }
-    }*/
+        }*/
+    }
 }
