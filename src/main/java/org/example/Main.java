@@ -9,6 +9,7 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) throws IOException {
+
         try {
             String[] resultadoDFila;
             String[] pronosticoDFila;
@@ -20,7 +21,6 @@ public class Main {
             Lector LectorDB = new Lector(resultadoDFila, pronosticoDFila);
 
             LectorDB.Funcion();
-
             //dataBase();
         } catch(Exception e) {System.out.println(e.getMessage());}
 
